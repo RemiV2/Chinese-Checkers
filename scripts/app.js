@@ -205,7 +205,7 @@ $(document).ready(function() {
       // Reset game
       getInitconfig();
       initializeBoard();
-    } else if (config.player% == 0) {
+    } else if (config.player%2 == 0) {
       $('#instructions').css('color', '#ad0101');
       if (window.random%3 == 1) {
         $('#instructions').text('Waiting for you, red!');
