@@ -1,0 +1,83 @@
+body {
+  font-family: "alegreya sans", arial, sans-serif;
+  background: #ad0101;
+}
+
+h1 {
+  color: #FFF;
+  text-align: center;
+  font-size: 45px;
+  margin-top: 20px;
+  margin-bottom: 15vmin;
+}
+
+.board {
+  background-color: #FFF;
+  transform: rotate(-45deg);
+  margin: 0 auto;
+  width: 60vmin;
+  height: 60vmin;
+  max-width: 450px;
+  max-height: 450px;
+  border: 1px solid black;
+  position: relative;
+  overflow: hidden;
+}
+
+.board > div {
+  border: 1px solid black;
+  border-collapse: collapse;
+  box-sizing: border-box;
+  width: 12.5%;
+  height: 12.5%;
+  float: left;
+  background: #fff;
+  padding: 5px;
+}
+
+.dotBorder {
+  width: 95%;
+  height: 95%;
+  padding: 5%;
+  background: #000 !important;
+  border-radius: 100%;
+}
+
+.redDot {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #ad0101 !important;
+}
+
+.blueDot {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: #3F51B5 !important;
+}
+
+.selected {
+  background: yellow !important;
+}
+
+.occupied {
+  background: orange !important;
+}
+
+.board div:nth-child(8n+1) {
+  background: #fff;
+  clear: left;
+}
+
+#instructions {
+  background: #fff;
+  padding: 5px;
+  color: #ad0101;
+  margin: 15vmin auto 0 auto;
+  width: 60vmin;
+  text-align: center;
+  font-size: 18px;
+  border: 2px solid black;
+}
