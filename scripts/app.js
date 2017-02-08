@@ -7,6 +7,8 @@ $(document).ready(function() {
 
   // Start game
   $('.board > div').click(function() {
+    var random = Math.floor(Math.random()*50);
+    window.random = random;
     // Select cell
     if ($('div.selected').length == 0) {
       var selectedIndex = $(this).attr('id');
@@ -21,13 +23,25 @@ $(document).ready(function() {
         }
         else {
           if (config.player%2 == 0) {
-            $('#instructions').text('Select only red cells!');
+            if (window.random%2 == 0) {
+              $('#instructions').text('Select only red cells!');
+            } else {
+              $('#instructions').text("That's not yours is it?");
+            }
           } else {
-            $('#instructions').text('Select only blue cells!');
+            if (window.random%2 == 0) {
+              $('#instructions').text('Only red cells please!');
+            } else {
+              $('#instructions').text("That's not yours is it?");
+            }
           }
         }
       } else {
-        $('#instructions').text('Too far!');
+        if (window.random%2 == 0) {
+          $('#instructions').text('Too far!');
+        } else {
+          $('#instructions').text("Sorry, that's out of reach!");
+        }
       }
     } else if ($('div.selected').length == 1) {
       var targetIndex = $(this).attr('id');
@@ -76,7 +90,11 @@ $(document).ready(function() {
     if (window.targetIndex == window.selectedIndex) {
       config.board[window.selectedIndex].selected = false;
       $('.selected').removeClass('selected');
-      $('#instructions').text('Okay, which one then?');
+      if (window.random%2 == 0) {
+        $('#instructions').text('Okay, which one then?');
+      } else {
+        $('#instructions').text('No problem, which one then?');
+      }
       if (window.hasBounced == true) {
         nextPlayer();
       }
@@ -127,7 +145,11 @@ $(document).ready(function() {
       $('.selected').html('');
       $('.selected').removeClass('selected');
     } else {
-      $('#instructions').text('Not possible!');
+      if (window.random%2 == 0) {
+        $('#instructions').text('Not possible, sorry!');
+      } else {
+        $('#instructions').text("That's not allowed, read the rules!");
+      }
     }
   }
 
@@ -185,10 +207,20 @@ $(document).ready(function() {
       initializeBoard();
     } else if (config.player%2 == 0) {
       $('#instructions').css('color', '#ad0101');
-      $('#instructions').text('Your turn, red!');
+      if (window.random%3 == 1) {
+        $('#instructions').text('Waiting for you, red!');
+      } else {
+        $('#instructions').text("Come on red, finish him!");
+      }
     } else {
       $('#instructions').css('color', '#3F51B5');
-      $('#instructions').text('Waiting for you, blue!');
+      if (window.random%3 == 0) {
+        $('#instructions').text('Waiting for you, blue!');
+      } else if (window.random%3 == 1){
+        $('#instructions').text("Show him how it's done, blue!");
+      } else {
+        $('#instructions').text("Come on blue, impress finish him!");
+      }
     }
   }
 
