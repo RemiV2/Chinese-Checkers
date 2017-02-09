@@ -59,11 +59,7 @@ h1 {
 }
 
 .selected {
-  background: yellow !important;
-}
-
-.occupied {
-  background: orange !important;
+  background: #FFEB3B !important;
 }
 
 .board div:nth-child(8n+1) {

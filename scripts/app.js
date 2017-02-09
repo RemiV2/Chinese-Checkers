@@ -289,7 +289,7 @@ $(document).ready(function() {
     if (gameOver == true) {
       return 'blue';
     } else {
-      for(i=39; i<64; i++) {
+      for (i=39; i<64; i++) {
         l++;
         for (j=0; j<l; j++) {
           if(config.board[i-j].red == false) {
