@@ -280,7 +280,7 @@ $(document).ready(function() {
   window.initializeBoard = initializeBoard;
 
   function hasWon() {
-    var gameOver = true, k=5, l=0, winner = '';
+    var gameOver = true, k=5, l=0;
     for(i=0; i<64 && gameOver == true; i++) {
       k--;
       for (j=0; j<k; j++) {
@@ -293,7 +293,8 @@ $(document).ready(function() {
     if (gameOver == true) {
       return 'blue';
     } else {
-      for (i=39; i<64; i++) {
+      gameOver = true;
+      for (i=39; i<64 && gameOver == true; i++) {
         l++;
         for (j=0; j<l; j++) {
           if(config.board[i-j].red == false) {
@@ -304,9 +305,11 @@ $(document).ready(function() {
       }
       if (gameOver == true) {
         return 'red';
+      } else {
+        return 'none';
       }
     }
-    return 'none';
   }
+  window.hasWon = hasWon;
 
 });
