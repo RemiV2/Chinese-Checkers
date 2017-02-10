@@ -30,7 +30,7 @@ $(document).ready(function() {
             }
           } else {
             if (window.random%2 == 0) {
-              $('#instructions').text('Only red cells please!');
+              $('#instructions').text('Only blue cells please!');
             } else {
               $('#instructions').text("That's not yours is it?");
             }
