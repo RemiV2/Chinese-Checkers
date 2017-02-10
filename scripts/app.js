@@ -50,7 +50,8 @@ $(document).ready(function() {
     }
   });
 
-  // Functions
+  // Functions used
+
   function isSelectable(selectedIndex) {
     if (
       (config.player % 2 == 0 && config.board[selectedIndex].red == true)
@@ -98,6 +99,9 @@ $(document).ready(function() {
       if (window.hasBounced == true) {
         nextPlayer();
       }
+    } else if (willBounce == false && hasBounced == true){
+      // Refuse non-bounce move after bounce
+      $('#instructions').text('Sorry, you can only bounce or stop here');
     } else if (willBounce == true) {
       // First jump
       if (config.player % 2 == 0) {
