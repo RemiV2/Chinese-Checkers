@@ -1,9 +1,13 @@
 $(document).ready(function() {
 
+  setTimeout('$("#loader").fadeOut(400);',550);
+
   // Getting ready
   var config = getInitconfig();
   window.config = config;
-  initializeBoard();
+  setTimeout('initializeBoard()', 400);
+  $('.board > div:not(.loader)').delay(400).css('visibility', 'visible');
+  //initializeBoard();
 
   // Start game
   $('.board > div').click(function() {
@@ -223,7 +227,7 @@ $(document).ready(function() {
       } else if (window.random%3 == 1){
         $('#instructions').text("Show him how it's done, blue!");
       } else {
-        $('#instructions').text("Come on blue, impress finish him!");
+        $('#instructions').text("Come on blue, finish him!");
       }
     }
   }
@@ -258,6 +262,7 @@ $(document).ready(function() {
       config.board[i].blue = false;
       $('#' + i).html('');
     }
+    // Place red dots
     for(i=0; i<64; i++) {
       k--;
       for (j=0; j<k; j++) {
@@ -267,6 +272,7 @@ $(document).ready(function() {
       }
       i += 7;
     }
+    // Place blue dots
     for(i=39; i<64; i++) {
       l++;
       for (j=0; j<l; j++) {
