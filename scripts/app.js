@@ -1,13 +1,10 @@
 $(document).ready(function() {
 
-  setTimeout('$("#loader").fadeOut(400);',550);
-
   // Getting ready
   var config = getInitconfig();
   window.config = config;
-  setTimeout('initializeBoard()', 400);
-  $('.board > div:not(.loader)').delay(400).css('visibility', 'visible');
-  //initializeBoard();
+  initializeBoard();
+  $('.board').fadeIn(400);
 
   // Start game
   $('.board > div').click(function() {

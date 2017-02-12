@@ -9,6 +9,7 @@ h1 {
   font-size: 45px;
   margin-top: 20px;
   margin-bottom: 13vmin;
+  animation: fadeInDown 0.4s ease-in-out;
 }
 
 .board {
@@ -22,30 +23,10 @@ h1 {
   border: 1px solid black;
   position: relative;
   overflow: hidden;
-}
-
-#loader {
-  z-index: 900;
-  width: 1px;
-  height: 1px;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border: 0;
-  animation-name: fillBoard;
-	animation-duration: 1.25s;
-	animation-timing-function: ease-in;
-}
-
-@keyframes fillBoard {
-  75% { opacity: 1; }
-  99% { opacity: 0; }
-  100% { transform: scale(400); }
+  display: none;
 }
 
 .board > div {
-  visibility: hidden;
   border: 1px solid black;
   border-collapse: collapse;
   box-sizing: border-box;
@@ -54,6 +35,14 @@ h1 {
   float: left;
   background: #fff;
   padding: 5px;
+}
+
+.visible {
+  visibility: visible;
+}
+
+.hidden {
+  visibility: hidden;
 }
 
 .dotBorder {
@@ -97,4 +86,63 @@ h1 {
   text-align: center;
   font-size: 18px;
   border: 2px solid black;
+  animation: fadeInUp 0.4s ease-in-out;
+}
+
+/* Reveal Animations */
+
+@-webkit-keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@-webkit-keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
 }
