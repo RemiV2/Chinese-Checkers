@@ -78,6 +78,7 @@ $(document).ready(function() {
       return false;
     }
   }
+  window.isAccessible = isAccessible;
 
   function occupyCell(targetIndex) {
     var willBounce = false;
@@ -219,7 +220,7 @@ $(document).ready(function() {
       } else if (window.random%3 == 1){
         $('#instructions').text("Show him how it's done, blue!");
       } else {
-        $('#instructions').text("Come on blue, impress finish him!");
+        $('#instructions').text("Come on blue, finish him!");
       }
     }
   }
@@ -304,5 +305,78 @@ $(document).ready(function() {
     }
     return 'none';
   }
+
+  // Artificial Intelligence Functions
+  // AI is blue player
+
+  function cellImportance(index) {
+    // How close it is to the opponent's base, and how centered it is
+    var positionInColumn = Math.floor(index/8);
+    var positionInLine = index%8;
+    return (63 - index) * (8 - Math.abs(positionInLine - positionInColumn));
+  }
+  window.cellImportance = cellImportance;
+
+  function getBestSelection() {
+    var bestSelection;
+    for (i=0; i<64; i++) {
+      if (
+        config.board[i].blue == true
+        && getBestDestination(i) != undefined
+        && cellImportance(i) < cellImportance(bestSelection)
+      ) {
+        bestSelection = i;
+      }
+    }
+    return bestSelection;
+  }
+  window.getBestSelection = getBestSelection;
+
+  var bounce = false, forceBounce = false;
+  function getBestDestination(index) {
+    var bestDestination = 63;
+    for (i=0; i<64; i++) {
+      // One-cell-long moves
+      if (
+        isAccessible(i, index)
+        && cellImportance(i) > cellImportance(bestDestination)
+        && forceBounce == false
+      ) {
+        bestDestination = i;
+        bounce = false;
+      }
+    }
+    // Regular bounces
+    if (canBounce(index).length > 0) {
+      for (j=0; j < canBounce(index).length; j++) {
+        if (
+          cellImportance(canBounce(index)[j]) > cellImportance(bestDestination)
+          && Math.abs(xDifference(canBounce(index)[j], index)) <= 2
+          && Math.abs(yDifference(canBounce(index)[j], index)) <= 2
+        ) {
+          bestDestination = canBounce(index)[j];
+          bounce = true;
+        }
+      }
+    }
+    // Recursive bounces
+    if (bounce == true && canBounce(bestDestination).length > 0) {
+      for (j=0; j < canBounce(i).length; j++) {
+        if (
+          cellImportance(canBounce(bestDestination)[j]) > cellImportance(bestDestination)
+          && Math.abs(xDifference(canBounce(bestDestination)[j], bestDestination)) <= 2
+          && Math.abs(yDifference(canBounce(bestDestination)[j], bestDestination)) <= 2
+        ) {
+          forceBounce = true;
+          console.log('recursive');
+          getBestDestination(bestDestination);
+        }
+      }
+    }
+    console.log(bounce);
+    return bestDestination;
+    // returns undefined if dot cannot move
+  }
+  window.getBestDestination = getBestDestination;
 
 });
