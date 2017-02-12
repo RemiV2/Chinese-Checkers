@@ -4,6 +4,7 @@ $(document).ready(function() {
   var config = getInitconfig();
   window.config = config;
   initializeBoard();
+  $('.board').fadeIn(400);
 
   // Start game
   $('.board > div').click(function() {
@@ -30,7 +31,7 @@ $(document).ready(function() {
             }
           } else {
             if (window.random%2 == 0) {
-              $('#instructions').text('Only red cells please!');
+              $('#instructions').text('Only blue cells please!');
             } else {
               $('#instructions').text("That's not yours is it?");
             }
@@ -50,7 +51,8 @@ $(document).ready(function() {
     }
   });
 
-  // Functions
+  // Functions used
+
   function isSelectable(selectedIndex) {
     if (
       (config.player % 2 == 0 && config.board[selectedIndex].red == true)
@@ -99,6 +101,9 @@ $(document).ready(function() {
       if (window.hasBounced == true) {
         nextPlayer();
       }
+    } else if (willBounce == false && hasBounced == true){
+      // Refuse non-bounce move after bounce
+      $('#instructions').text('Sorry, you can only bounce or stop here');
     } else if (willBounce == true) {
       // First jump
       if (config.player % 2 == 0) {
@@ -255,6 +260,7 @@ $(document).ready(function() {
       config.board[i].blue = false;
       $('#' + i).html('');
     }
+    // Place red dots
     for(i=0; i<64; i++) {
       k--;
       for (j=0; j<k; j++) {
@@ -264,6 +270,7 @@ $(document).ready(function() {
       }
       i += 7;
     }
+    // Place blue dots
     for(i=39; i<64; i++) {
       l++;
       for (j=0; j<l; j++) {
@@ -277,7 +284,7 @@ $(document).ready(function() {
   window.initializeBoard = initializeBoard;
 
   function hasWon() {
-    var gameOver = true, k=5, l=0, winner = '';
+    var gameOver = true, k=5, l=0;
     for(i=0; i<64 && gameOver == true; i++) {
       k--;
       for (j=0; j<k; j++) {
@@ -290,7 +297,8 @@ $(document).ready(function() {
     if (gameOver == true) {
       return 'blue';
     } else {
-      for(i=39; i<64; i++) {
+      gameOver = true;
+      for (i=39; i<64 && gameOver == true; i++) {
         l++;
         for (j=0; j<l; j++) {
           if(config.board[i-j].red == false) {
@@ -301,10 +309,12 @@ $(document).ready(function() {
       }
       if (gameOver == true) {
         return 'red';
+      } else {
+        return 'none';
       }
     }
-    return 'none';
   }
+  window.hasWon = hasWon;
 
   // Artificial Intelligence Functions
   // AI is blue player
