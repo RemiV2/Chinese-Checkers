@@ -321,9 +321,10 @@ $(document).ready(function() {
 
   function cellImportance(index) {
     // How close it is to the opponent's base, and how centered it is
-    var positionInColumn = Math.floor(index/8);
-    var positionInLine = index%8;
-    return (63 - index) * (8 - Math.abs(positionInLine - positionInColumn));
+    var positionInColumn = Math.floor(index/8)+1; // 56 => 8
+    var positionInLine = index%8 +1; //56 => 1
+    //return (63 - index) * (8 - Math.abs(positionInLine - positionInColumn));
+    return (64 - positionInLine * positionInColumn);
   }
   window.cellImportance = cellImportance;
 
