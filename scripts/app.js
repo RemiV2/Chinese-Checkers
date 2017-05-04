@@ -231,10 +231,10 @@ $(document).ready(function() {
   }
 
   function getInitconfig() {
-    var board = new Array(64);
-    var player = 0, j=4, k=0;
-    var blueDot = "<div class='dotBorder'><div class='blueDot'></div></div>";
-    var redDot = "<div class='dotBorder'><div class='redDot'></div></div>";
+    var board = new Array(64),
+    player = 0, j=4, k=0,
+    blueDot = "<div class='dotBorder'><div class='blueDot'></div></div>",
+    redDot = "<div class='dotBorder'><div class='redDot'></div></div>";
     for (i=0; i<64; i++) {
       board[i] = {};
       board[i].red = false;
@@ -321,10 +321,16 @@ $(document).ready(function() {
 
   function cellImportance(index) {
     // How close it is to the opponent's base, and how centered it is
-    var positionInColumn = Math.floor(index/8)+1; // 56 => 8
-    var positionInLine = index%8 +1; //56 => 1
-    //return (63 - index) * (8 - Math.abs(positionInLine - positionInColumn));
-    return (64 - positionInLine * positionInColumn);
+    var positionInColumn = Math.floor(index/8)+1,
+    positionInLine = index%8 +1,
+    centerIndex = Math.abs(positionInLine - positionInColumn),
+    importance = 64 - positionInLine * positionInColumn;
+    // importance is high if the cell is on the left
+    if (centerIndex >= 4) {
+      // decrease cell importance if it's not centered
+      importance /= centerIndex/3;
+    }
+    return importance;
   }
   window.cellImportance = cellImportance;
 
@@ -343,7 +349,7 @@ $(document).ready(function() {
   }
   window.getBestSelection = getBestSelection;
 
-  var bounce = false, forceBounce = false;
+  var bounce = false;
   function getBestDestination(index) {
     var bestDestination = 63;
     for (i=0; i<64; i++) {
@@ -351,7 +357,7 @@ $(document).ready(function() {
       if (
         isAccessible(i, index)
         && cellImportance(i) > cellImportance(bestDestination)
-        && forceBounce == false
+        && bounce == false
       ) {
         bestDestination = i;
         bounce = false;
@@ -378,7 +384,6 @@ $(document).ready(function() {
           && Math.abs(xDifference(canBounce(bestDestination)[j], bestDestination)) <= 2
           && Math.abs(yDifference(canBounce(bestDestination)[j], bestDestination)) <= 2
         ) {
-          forceBounce = true;
           console.log('recursive');
           getBestDestination(bestDestination);
         }
