@@ -1,6 +1,11 @@
 $(document).ready(function() {
 
   // Getting ready
+  for (i=0; i<64; i++) {
+    // Display cells
+    $('.board').append("<div id='" + i + "'></div>")
+  }
+  
   var config = getInitconfig();
   window.config = config;
   initializeBoard();
@@ -158,6 +163,7 @@ $(document).ready(function() {
       }
     }
   }
+  window.occupyCell = occupyCell;
 
   function canBounce(origin) {
     var possibleBounces = new Array();
@@ -340,7 +346,7 @@ $(document).ready(function() {
       if (
         config.board[i].blue == true
         && getBestDestination(i) != undefined
-        && cellImportance(i) < cellImportance(bestSelection)
+        && (cellImportance(i) < cellImportance(bestSelection) || bestSelection == undefined)
       ) {
         bestSelection = i;
       }
@@ -351,23 +357,22 @@ $(document).ready(function() {
 
   var bounce = false;
   function getBestDestination(index) {
-    var bestDestination = 63;
-    for (i=0; i<64; i++) {
+    var bestDestination;
+    for (var i=0; i<64; i++) {
       // One-cell-long moves
       if (
         isAccessible(i, index)
-        && cellImportance(i) > cellImportance(bestDestination)
+        && (cellImportance(i) > cellImportance(bestDestination) || bestDestination == undefined)
         && bounce == false
       ) {
         bestDestination = i;
-        bounce = false;
       }
     }
     // Regular bounces
     if (canBounce(index).length > 0) {
       for (j=0; j < canBounce(index).length; j++) {
         if (
-          cellImportance(canBounce(index)[j]) > cellImportance(bestDestination)
+          (cellImportance(canBounce(index)[j]) > cellImportance(bestDestination) || bestDestination == undefined)
           && Math.abs(xDifference(canBounce(index)[j], index)) <= 2
           && Math.abs(yDifference(canBounce(index)[j], index)) <= 2
         ) {
@@ -380,7 +385,7 @@ $(document).ready(function() {
     if (bounce == true && canBounce(bestDestination).length > 0) {
       for (j=0; j < canBounce(i).length; j++) {
         if (
-          cellImportance(canBounce(bestDestination)[j]) > cellImportance(bestDestination)
+          (cellImportance(canBounce(bestDestination)[j]) > cellImportance(bestDestination) || bestDestination == undefined)
           && Math.abs(xDifference(canBounce(bestDestination)[j], bestDestination)) <= 2
           && Math.abs(yDifference(canBounce(bestDestination)[j], bestDestination)) <= 2
         ) {
@@ -389,10 +394,24 @@ $(document).ready(function() {
         }
       }
     }
-    console.log(bounce);
+    //console.log(bounce);
     return bestDestination;
     // returns undefined if dot cannot move
   }
   window.getBestDestination = getBestDestination;
+
+  // Visual changes when AI plays
+  function playAI() {
+    // Select a cell
+    var startIndex = getBestSelection();
+    config.board[startIndex].selected = true;
+    $('#' + getBestSelection(startIndex)).toggleClass('selected');
+    // Occupy new cell
+    console.log(getBestDestination(startIndex));
+    occupyCell(getBestDestination(startIndex));
+    // Wait for next player
+    nextPlayer();
+  }
+  window.playAI = playAI;
 
 });
