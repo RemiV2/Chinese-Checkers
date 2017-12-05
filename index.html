@@ -8,12 +8,31 @@
     <title>Play Chinese Checkers Online</title>
     <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:700" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+    <link rel="stylesheet" href="styles/reset.min.css">
     <link rel="stylesheet" href="styles/style.css">
   </head>
   <body>
-    <h1>Chinese Checkers</h1>
-    <div class="board"></div>
-    <p id="instructions">Red starts!</p>
+    <div class="game">
+      <h1>Chinese Checkers</h1>
+      <div class="board"></div>
+      <p id="instructions">Red starts!</p>
+    </div>
+    <div class="rules">
+      <h2>How to play Chinese Checkers</h2>
+      <p>The goal is to put all of your pawns in the opponent's base before he does. A player's base is the triangular shape on the edge of the board. It is also the place where all of your pawns are before the game starts.</p>
+      <p>In Chinese Checkers, the two opponents play one at a time, and can only move one pawn per round. You shall always start your round by clicking on the pawn you want to move. However, the Chinese Checkers game allows several move possibities. A player can move his pawn:</p>
+      <ul>
+        <li>To an adjacent empty cell. This includes cells that can be accessed by a single move, without skipping any other cells. This move can be in a horizontal, vertical or diagonal direction.</li>
+        <li>Over an adjacent pawn. We call that move a bounce. This allows a two-cell pawn move. For this Chinese Checkers typical move to be possible, you need to fullfill a specific condition. Your pawn, another adjacent pawn and an empty cell must form a straight uninterrupted line</li>
+      </ul>
+      <p>Chinese checkers bounces are special for another reason : you can combine them. Therefore, if you start your round with a bounce, you can do another one as long as your position allows it. This strategy is called rebouncing, and is they key to the Chinese Checkers strategy.</p>
+      <p>Furthermore, please note that there is no way to eliminate a pawn. The game starts and ends with 20 pawns, 10 per player.</p>
+      <h2>The history of Chinese Checkers</h2>
+      <p>The Chinese Checkers game, despite its name, wasn't actually created in China. It appears that the game was conceived in Germany (Europe) in 1892, and was then called Stern Halma. That was the first time people played Chinese Checkers as we know that game today, but it was heavily inspired by an even older game.</p>
+      <p>That older game is called the "Halma Game", and it was created in the United States during the 19th century. The only difference between Halma and Chinese Checkers is the shape of the board. Indeed, the vurrents game boards are star-shaped, whereas Halma was played on a humble square plate.</p>
+      <p>Therefore, the name Chinese Checkers is quite a stretch, for a german american-inspired board game. The first time the Sern Halma was called that way was in 1928, by the company Bill and Jack Pressman.</p>
+      <p>But why did they come up with the name Chinese Cherckers? It was mostly a marketing scheme, to give the game more personality. The Chinese Checkers game involve a lot of strategy and meditation. Naming it Chinese is an allusion to the Wise Buddhist monks, and emphasizes that aspect of Chinese Checkers.</p>
+    </div>
     <script type="text/javascript" src="scripts/jquery.js"></script>
     <script type="text/javascript" src="scripts/app.js"></script>
   </body>

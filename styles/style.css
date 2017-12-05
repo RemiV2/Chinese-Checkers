@@ -1,6 +1,8 @@
 body {
   font-family: "alegreya sans", arial, sans-serif;
   background: #ad0101;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1 {
@@ -10,6 +12,11 @@ h1 {
   margin-top: 20px;
   margin-bottom: 13vmin;
   animation: fadeInDown 0.4s ease-in-out;
+}
+
+.game {
+  /* height: 100vh; */
+  min-height: 500px;
 }
 
 .board {
@@ -81,12 +88,54 @@ h1 {
   background: #fff;
   padding: 5px;
   color: #ad0101;
-  margin: 14vmin auto 0 auto;
+  margin: 14vmin auto 5vmin auto;
   width: 60vmin;
   text-align: center;
   font-size: 18px;
   border: 2px solid black;
+  will-change: transform;
   animation: fadeInUp 0.4s ease-in-out;
+}
+
+.rules {
+  padding: 10px;
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+.rules h2 {
+  color: #fff;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.rules p, .rules ul li {
+  font-family: 'helvetica', 'roboto', arial, sans-serif;
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #fff;
+  line-height: 30px;
+}
+
+.rules ul {
+  list-style: disc;
+}
+
+@media screen and (max-width: 500px) {
+  h1 {
+    margin-top: 14.5vmin;
+  }
+  .game {
+    min-height: unset;
+  }
+  #instructions {
+    margin-bottom: 14.5vmin;
+  }
+  .board {
+    transform: rotate(0deg);
+    width: 95vw;
+    height: 95vw;
+  }
 }
 
 /* Reveal Animations */
@@ -94,10 +143,10 @@ h1 {
 @-webkit-keyframes fadeInUp {
   from {
     opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
   }
-
+  
   to {
     opacity: 1;
     -webkit-transform: none;
@@ -108,10 +157,10 @@ h1 {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
   }
-
+  
   to {
     opacity: 1;
     -webkit-transform: none;
@@ -122,8 +171,8 @@ h1 {
 @-webkit-keyframes fadeInDown {
   from {
     opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
   }
 
   to {
@@ -136,8 +185,8 @@ h1 {
 @keyframes fadeInDown {
   from {
     opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
   }
 
   to {
