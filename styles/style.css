@@ -6,12 +6,13 @@ body {
 }
 
 h1 {
-  color: #FFF;
+  color: #fff;
   text-align: center;
   font-size: 45px;
   margin-top: 20px;
   margin-bottom: 13vmin;
   animation: fadeInDown 0.4s ease-in-out;
+  will-change: transform;
 }
 
 .game {
@@ -20,7 +21,7 @@ h1 {
 }
 
 .board {
-  background-color: #FFF;
+  background-color: #fff;
   transform: rotate(-45deg);
   margin: 0 auto;
   width: 60vmin;
@@ -31,6 +32,7 @@ h1 {
   position: relative;
   overflow: hidden;
   display: none;
+  will-change: transform;
 }
 
 .board > div {
@@ -72,11 +74,11 @@ h1 {
   height: 100%;
   box-sizing: border-box;
   border-radius: 50%;
-  background: #3F51B5 !important;
+  background: #3f51b5 !important;
 }
 
 .selected {
-  background: #FFEB3B !important;
+  background: #ffEb3b !important;
 }
 
 .board div:nth-child(8n+1) {
@@ -90,6 +92,7 @@ h1 {
   color: #ad0101;
   margin: 14vmin auto 5vmin auto;
   width: 60vmin;
+  min-width: 300px;
   text-align: center;
   font-size: 18px;
   border: 2px solid black;
